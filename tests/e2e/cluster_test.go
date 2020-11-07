@@ -20,9 +20,10 @@ import (
 	"net/url"
 	"os"
 	"strings"
+	"testing"
 	"time"
 
-	"go.etcd.io/etcd/etcdserver"
+	"go.etcd.io/etcd/server/v3/etcdserver"
 )
 
 const etcdProcessBasePort = 20000
@@ -89,7 +90,7 @@ var (
 	configJWT = etcdProcessClusterConfig{
 		clusterSize:   1,
 		initialToken:  "new",
-		authTokenOpts: "jwt,pub-key=../../integration/fixtures/server.crt,priv-key=../../integration/fixtures/server.key.insecure,sign-method=RS256,ttl=1s",
+		authTokenOpts: "jwt,pub-key=../fixtures/server.crt,priv-key=../fixtures/server.key.insecure,sign-method=RS256,ttl=1s",
 	}
 )
 
@@ -141,7 +142,9 @@ type etcdProcessClusterConfig struct {
 
 // newEtcdProcessCluster launches a new cluster from etcd processes, returning
 // a new etcdProcessCluster once all nodes are ready to accept client requests.
-func newEtcdProcessCluster(cfg *etcdProcessClusterConfig) (*etcdProcessCluster, error) {
+func newEtcdProcessCluster(t testing.TB, cfg *etcdProcessClusterConfig) (*etcdProcessCluster, error) {
+	skipInShortMode(t)
+
 	etcdCfgs := cfg.etcdServerProcessConfigs()
 	epc := &etcdProcessCluster{
 		cfg:   cfg,

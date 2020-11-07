@@ -29,7 +29,7 @@ import (
 	"testing"
 	"time"
 
-	"go.etcd.io/etcd/pkg/transport"
+	"go.etcd.io/etcd/pkg/v3/transport"
 
 	"go.uber.org/zap"
 )
@@ -38,9 +38,9 @@ import (
 var testLogger = zap.NewExample()
 
 var testTLSInfo = transport.TLSInfo{
-	KeyFile:        "./fixtures/server.key.insecure",
-	CertFile:       "./fixtures/server.crt",
-	TrustedCAFile:  "./fixtures/ca.crt",
+	KeyFile:        "../../tests/fixtures/server.key.insecure",
+	CertFile:       "../../tests/fixtures/server.crt",
+	TrustedCAFile:  "../../tests/fixtures/ca.crt",
 	ClientCertAuth: true,
 }
 
@@ -94,7 +94,7 @@ func testServer(t *testing.T, scheme string, secure bool, delayTx bool) {
 		}
 	}()
 
-	recvc := make(chan []byte)
+	recvc := make(chan []byte, 1)
 	go func() {
 		for i := 0; i < 2; i++ {
 			recvc <- receive(t, ln)
@@ -247,7 +247,7 @@ func TestServer_PauseTx(t *testing.T) {
 	data := []byte("Hello World!")
 	send(t, data, scheme, srcAddr, transport.TLSInfo{})
 
-	recvc := make(chan []byte)
+	recvc := make(chan []byte, 1)
 	go func() {
 		recvc <- receive(t, ln)
 	}()
@@ -364,7 +364,7 @@ func TestServer_BlackholeTx(t *testing.T) {
 	data := []byte("Hello World!")
 	send(t, data, scheme, srcAddr, transport.TLSInfo{})
 
-	recvc := make(chan []byte)
+	recvc := make(chan []byte, 1)
 	go func() {
 		recvc <- receive(t, ln)
 	}()

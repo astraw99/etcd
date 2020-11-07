@@ -28,13 +28,13 @@ import (
 	"strings"
 	"time"
 
-	"go.etcd.io/etcd/etcdserver/api/snap"
-	"go.etcd.io/etcd/etcdserver/etcdserverpb"
-	"go.etcd.io/etcd/pkg/pbutil"
-	"go.etcd.io/etcd/pkg/types"
-	"go.etcd.io/etcd/raft/raftpb"
-	"go.etcd.io/etcd/wal"
-	"go.etcd.io/etcd/wal/walpb"
+	"go.etcd.io/etcd/api/v3/etcdserverpb"
+	"go.etcd.io/etcd/pkg/v3/pbutil"
+	"go.etcd.io/etcd/pkg/v3/types"
+	"go.etcd.io/etcd/raft/v3/raftpb"
+	"go.etcd.io/etcd/server/v3/etcdserver/api/snap"
+	"go.etcd.io/etcd/server/v3/wal"
+	"go.etcd.io/etcd/server/v3/wal/walpb"
 	"go.uber.org/zap"
 )
 
@@ -254,7 +254,7 @@ func printRequest(entry raftpb.Entry) {
 		case "":
 			fmt.Printf("\tnoop")
 		case "SYNC":
-			fmt.Printf("\tmethod=SYNC time=%q", time.Unix(0, r.Time))
+			fmt.Printf("\tmethod=SYNC time=%q", time.Unix(0, r.Time).UTC())
 		case "QGET", "DELETE":
 			fmt.Printf("\tmethod=%s path=%s", r.Method, excerpt(r.Path, 64, 64))
 		default:

@@ -20,11 +20,13 @@ import (
 	"sync"
 	"time"
 
-	v3 "go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/etcdserver/api/v3rpc/rpctypes"
-	"go.etcd.io/etcd/pkg/flags"
+	"go.etcd.io/etcd/api/v3/etcdserverpb"
+	"go.etcd.io/etcd/api/v3/v3rpc/rpctypes"
+	v3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/pkg/v3/flags"
 
 	"github.com/spf13/cobra"
+	"go.uber.org/zap"
 )
 
 var epClusterEndpoints bool
@@ -85,7 +87,11 @@ type epHealth struct {
 
 // epHealthCommandFunc executes the "endpoint-health" command.
 func epHealthCommandFunc(cmd *cobra.Command, args []string) {
-	flags.SetPflagsFromEnv("ETCDCTL", cmd.InheritedFlags())
+	lg, err := zap.NewProduction()
+	if err != nil {
+		ExitWithError(ExitError, err)
+	}
+	flags.SetPflagsFromEnv(lg, "ETCDCTL", cmd.InheritedFlags())
 	initDisplayFromCmd(cmd)
 
 	sec := secureCfgFromCmd(cmd)
@@ -119,7 +125,6 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 			// endpoint is health.
 			ctx, cancel := commandCtx(cmd)
 			_, err = cli.Get(ctx, "health")
-			cancel()
 			eh := epHealth{Ep: ep, Health: false, Took: time.Since(st).String()}
 			// permission denied is OK since proposal goes through consensus to get it
 			if err == nil || err == rpctypes.ErrPermissionDenied {
@@ -127,6 +132,28 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 			} else {
 				eh.Error = err.Error()
 			}
+
+			if eh.Health == true {
+				resp, err := cli.AlarmList(ctx)
+				if err == nil && len(resp.Alarms) > 0 {
+					eh.Health = false
+					eh.Error = "Active Alarm(s): "
+					for _, v := range resp.Alarms {
+						switch v.Alarm {
+						case etcdserverpb.AlarmType_NOSPACE:
+							eh.Error = eh.Error + "NOSPACE "
+						case etcdserverpb.AlarmType_CORRUPT:
+							eh.Error = eh.Error + "CORRUPT "
+						default:
+							eh.Error = eh.Error + "UNKNOWN "
+						}
+					}
+				} else if err != nil {
+					eh.Health = false
+					eh.Error = "Unable to fetch the alarm list"
+				}
+			}
+			cancel()
 			hch <- eh
 		}(cfg)
 	}

@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"go.etcd.io/etcd/pkg/fileutil"
-	"go.etcd.io/etcd/pkg/testutil"
-	"go.etcd.io/etcd/version"
+	"go.etcd.io/etcd/api/v3/version"
+	"go.etcd.io/etcd/pkg/v3/fileutil"
+	"go.etcd.io/etcd/pkg/v3/testutil"
 )
 
 // TestReleaseUpgrade ensures that changes to master branch does not affect
@@ -41,7 +41,7 @@ func TestReleaseUpgrade(t *testing.T) {
 	copiedCfg.snapshotCount = 3
 	copiedCfg.baseScheme = "unix" // to avoid port conflict
 
-	epc, err := newEtcdProcessCluster(&copiedCfg)
+	epc, err := newEtcdProcessCluster(t, &copiedCfg)
 	if err != nil {
 		t.Fatalf("could not start etcd process cluster (%v)", err)
 	}
@@ -132,7 +132,7 @@ func TestReleaseUpgradeWithRestart(t *testing.T) {
 	copiedCfg.snapshotCount = 10
 	copiedCfg.baseScheme = "unix"
 
-	epc, err := newEtcdProcessCluster(&copiedCfg)
+	epc, err := newEtcdProcessCluster(t, &copiedCfg)
 	if err != nil {
 		t.Fatalf("could not start etcd process cluster (%v)", err)
 	}

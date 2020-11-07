@@ -4,12 +4,13 @@
 This is a generated documentation. Please read the proto files for more.
 
 
-##### service `Auth` (etcdserver/etcdserverpb/rpc.proto)
+##### service `Auth` (api/etcdserverpb/rpc.proto)
 
 | Method | Request Type | Response Type | Description |
 | ------ | ------------ | ------------- | ----------- |
 | AuthEnable | AuthEnableRequest | AuthEnableResponse | AuthEnable enables authentication. |
 | AuthDisable | AuthDisableRequest | AuthDisableResponse | AuthDisable disables authentication. |
+| AuthStatus | AuthStatusRequest | AuthStatusResponse | AuthStatus displays authentication status. |
 | Authenticate | AuthenticateRequest | AuthenticateResponse | Authenticate processes an authenticate request. |
 | UserAdd | AuthUserAddRequest | AuthUserAddResponse | UserAdd adds a new user. User name cannot be empty. |
 | UserGet | AuthUserGetRequest | AuthUserGetResponse | UserGet gets detailed user information. |
@@ -27,7 +28,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### service `Cluster` (etcdserver/etcdserverpb/rpc.proto)
+##### service `Cluster` (api/etcdserverpb/rpc.proto)
 
 | Method | Request Type | Response Type | Description |
 | ------ | ------------ | ------------- | ----------- |
@@ -39,7 +40,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### service `KV` (etcdserver/etcdserverpb/rpc.proto)
+##### service `KV` (api/etcdserverpb/rpc.proto)
 
 | Method | Request Type | Response Type | Description |
 | ------ | ------------ | ------------- | ----------- |
@@ -51,7 +52,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### service `Lease` (etcdserver/etcdserverpb/rpc.proto)
+##### service `Lease` (api/etcdserverpb/rpc.proto)
 
 | Method | Request Type | Response Type | Description |
 | ------ | ------------ | ------------- | ----------- |
@@ -63,7 +64,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### service `Maintenance` (etcdserver/etcdserverpb/rpc.proto)
+##### service `Maintenance` (api/etcdserverpb/rpc.proto)
 
 | Method | Request Type | Response Type | Description |
 | ------ | ------------ | ------------- | ----------- |
@@ -74,10 +75,11 @@ This is a generated documentation. Please read the proto files for more.
 | HashKV | HashKVRequest | HashKVResponse | HashKV computes the hash of all MVCC keys up to a given revision. It only iterates "key" bucket in backend storage. |
 | Snapshot | SnapshotRequest | SnapshotResponse | Snapshot sends a snapshot of the entire backend from a member over a stream to a client. |
 | MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeader requests current leader node to transfer its leadership to transferee. |
+| Downgrade | DowngradeRequest | DowngradeResponse | Downgrade requests downgrade, cancel downgrade on the cluster version. |
 
 
 
-##### service `Watch` (etcdserver/etcdserverpb/rpc.proto)
+##### service `Watch` (api/etcdserverpb/rpc.proto)
 
 | Method | Request Type | Response Type | Description |
 | ------ | ------------ | ------------- | ----------- |
@@ -85,7 +87,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### message `AlarmMember` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AlarmMember` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -94,7 +96,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### message `AlarmRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AlarmRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -104,7 +106,7 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### message `AlarmResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AlarmResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -113,13 +115,13 @@ This is a generated documentation. Please read the proto files for more.
 
 
 
-##### message `AuthDisableRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthDisableRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `AuthDisableResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthDisableResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -127,13 +129,13 @@ Empty field.
 
 
 
-##### message `AuthEnableRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthEnableRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `AuthEnableResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthEnableResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -141,7 +143,7 @@ Empty field.
 
 
 
-##### message `AuthRoleAddRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleAddRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -149,7 +151,7 @@ Empty field.
 
 
 
-##### message `AuthRoleAddResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleAddResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -157,7 +159,7 @@ Empty field.
 
 
 
-##### message `AuthRoleDeleteRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleDeleteRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -165,7 +167,7 @@ Empty field.
 
 
 
-##### message `AuthRoleDeleteResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleDeleteResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -173,7 +175,7 @@ Empty field.
 
 
 
-##### message `AuthRoleGetRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleGetRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -181,7 +183,7 @@ Empty field.
 
 
 
-##### message `AuthRoleGetResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleGetResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -190,7 +192,7 @@ Empty field.
 
 
 
-##### message `AuthRoleGrantPermissionRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleGrantPermissionRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -199,7 +201,7 @@ Empty field.
 
 
 
-##### message `AuthRoleGrantPermissionResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleGrantPermissionResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -207,13 +209,13 @@ Empty field.
 
 
 
-##### message `AuthRoleListRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleListRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `AuthRoleListResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleListResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -222,7 +224,7 @@ Empty field.
 
 
 
-##### message `AuthRoleRevokePermissionRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleRevokePermissionRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -232,7 +234,7 @@ Empty field.
 
 
 
-##### message `AuthRoleRevokePermissionResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthRoleRevokePermissionResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -240,17 +242,34 @@ Empty field.
 
 
 
-##### message `AuthUserAddRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthStatusRequest` (api/etcdserverpb/rpc.proto)
+
+Empty field.
+
+
+
+##### message `AuthStatusResponse` (api/etcdserverpb/rpc.proto)
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| header |  | ResponseHeader |
+| enabled |  | bool |
+| authRevision | authRevision is the current revision of auth store | uint64 |
+
+
+
+##### message `AuthUserAddRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
 | name |  | string |
 | password |  | string |
 | options |  | authpb.UserAddOptions |
+| hashedPassword |  | string |
 
 
 
-##### message `AuthUserAddResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserAddResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -258,16 +277,17 @@ Empty field.
 
 
 
-##### message `AuthUserChangePasswordRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserChangePasswordRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
 | name | name is the name of the user whose password is being changed. | string |
-| password | password is the new password for the user. | string |
+| password | password is the new password for the user. Note that this field will be removed in the API layer. | string |
+| hashedPassword | hashedPassword is the new password for the user. Note that this field will be initialized in the API layer. | string |
 
 
 
-##### message `AuthUserChangePasswordResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -275,7 +295,7 @@ Empty field.
 
 
 
-##### message `AuthUserDeleteRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserDeleteRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -283,7 +303,7 @@ Empty field.
 
 
 
-##### message `AuthUserDeleteResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserDeleteResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -291,7 +311,7 @@ Empty field.
 
 
 
-##### message `AuthUserGetRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserGetRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -299,7 +319,7 @@ Empty field.
 
 
 
-##### message `AuthUserGetResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserGetResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -308,7 +328,7 @@ Empty field.
 
 
 
-##### message `AuthUserGrantRoleRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserGrantRoleRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -317,7 +337,7 @@ Empty field.
 
 
 
-##### message `AuthUserGrantRoleResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserGrantRoleResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -325,13 +345,13 @@ Empty field.
 
 
 
-##### message `AuthUserListRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserListRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `AuthUserListResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserListResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -340,7 +360,7 @@ Empty field.
 
 
 
-##### message `AuthUserRevokeRoleRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserRevokeRoleRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -349,7 +369,7 @@ Empty field.
 
 
 
-##### message `AuthUserRevokeRoleResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthUserRevokeRoleResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -357,7 +377,7 @@ Empty field.
 
 
 
-##### message `AuthenticateRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthenticateRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -366,7 +386,7 @@ Empty field.
 
 
 
-##### message `AuthenticateResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `AuthenticateResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -375,7 +395,7 @@ Empty field.
 
 
 
-##### message `CompactionRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `CompactionRequest` (api/etcdserverpb/rpc.proto)
 
 CompactionRequest compacts the key-value store up to a given revision. All superseded keys with a revision less than the compaction revision will be removed.
 
@@ -386,7 +406,7 @@ CompactionRequest compacts the key-value store up to a given revision. All super
 
 
 
-##### message `CompactionResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `CompactionResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -394,7 +414,7 @@ CompactionRequest compacts the key-value store up to a given revision. All super
 
 
 
-##### message `Compare` (etcdserver/etcdserverpb/rpc.proto)
+##### message `Compare` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -411,13 +431,13 @@ CompactionRequest compacts the key-value store up to a given revision. All super
 
 
 
-##### message `DefragmentRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `DefragmentRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `DefragmentResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `DefragmentResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -425,7 +445,7 @@ Empty field.
 
 
 
-##### message `DeleteRangeRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `DeleteRangeRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -435,7 +455,7 @@ Empty field.
 
 
 
-##### message `DeleteRangeResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `DeleteRangeResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -445,7 +465,25 @@ Empty field.
 
 
 
-##### message `HashKVRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `DowngradeRequest` (api/etcdserverpb/rpc.proto)
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| action | action is the kind of downgrade request to issue. The action may VALIDATE the target version, DOWNGRADE the cluster version, or CANCEL the current downgrading job. | DowngradeAction |
+| version | version is the target version to downgrade. | string |
+
+
+
+##### message `DowngradeResponse` (api/etcdserverpb/rpc.proto)
+
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| header |  | ResponseHeader |
+| version | version is the current cluster version. | string |
+
+
+
+##### message `HashKVRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -453,7 +491,7 @@ Empty field.
 
 
 
-##### message `HashKVResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `HashKVResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -463,13 +501,13 @@ Empty field.
 
 
 
-##### message `HashRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `HashRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `HashResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `HashResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -478,7 +516,7 @@ Empty field.
 
 
 
-##### message `LeaseCheckpoint` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseCheckpoint` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -487,7 +525,7 @@ Empty field.
 
 
 
-##### message `LeaseCheckpointRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -495,7 +533,7 @@ Empty field.
 
 
 
-##### message `LeaseCheckpointResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseCheckpointResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -503,7 +541,7 @@ Empty field.
 
 
 
-##### message `LeaseGrantRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseGrantRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -512,7 +550,7 @@ Empty field.
 
 
 
-##### message `LeaseGrantResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseGrantResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -523,7 +561,7 @@ Empty field.
 
 
 
-##### message `LeaseKeepAliveRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -531,7 +569,7 @@ Empty field.
 
 
 
-##### message `LeaseKeepAliveResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -541,13 +579,13 @@ Empty field.
 
 
 
-##### message `LeaseLeasesRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `LeaseLeasesResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseLeasesResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -556,7 +594,7 @@ Empty field.
 
 
 
-##### message `LeaseRevokeRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseRevokeRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -564,7 +602,7 @@ Empty field.
 
 
 
-##### message `LeaseRevokeResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseRevokeResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -572,7 +610,7 @@ Empty field.
 
 
 
-##### message `LeaseStatus` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseStatus` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -580,7 +618,7 @@ Empty field.
 
 
 
-##### message `LeaseTimeToLiveRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseTimeToLiveRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -589,7 +627,7 @@ Empty field.
 
 
 
-##### message `LeaseTimeToLiveResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `LeaseTimeToLiveResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -601,7 +639,7 @@ Empty field.
 
 
 
-##### message `Member` (etcdserver/etcdserverpb/rpc.proto)
+##### message `Member` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -613,7 +651,7 @@ Empty field.
 
 
 
-##### message `MemberAddRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberAddRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -622,7 +660,7 @@ Empty field.
 
 
 
-##### message `MemberAddResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberAddResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -632,13 +670,15 @@ Empty field.
 
 
 
-##### message `MemberListRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberListRequest` (api/etcdserverpb/rpc.proto)
 
-Empty field.
+| Field | Description | Type |
+| ----- | ----------- | ---- |
+| linearizable |  | bool |
 
 
 
-##### message `MemberListResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberListResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -647,7 +687,7 @@ Empty field.
 
 
 
-##### message `MemberPromoteRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberPromoteRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -655,7 +695,7 @@ Empty field.
 
 
 
-##### message `MemberPromoteResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberPromoteResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -664,7 +704,7 @@ Empty field.
 
 
 
-##### message `MemberRemoveRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberRemoveRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -672,7 +712,7 @@ Empty field.
 
 
 
-##### message `MemberRemoveResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberRemoveResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -681,7 +721,7 @@ Empty field.
 
 
 
-##### message `MemberUpdateRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberUpdateRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -690,7 +730,7 @@ Empty field.
 
 
 
-##### message `MemberUpdateResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MemberUpdateResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -699,7 +739,7 @@ Empty field.
 
 
 
-##### message `MoveLeaderRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MoveLeaderRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -707,7 +747,7 @@ Empty field.
 
 
 
-##### message `MoveLeaderResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `MoveLeaderResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -715,7 +755,7 @@ Empty field.
 
 
 
-##### message `PutRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `PutRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -728,7 +768,7 @@ Empty field.
 
 
 
-##### message `PutResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `PutResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -737,7 +777,7 @@ Empty field.
 
 
 
-##### message `RangeRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `RangeRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -757,7 +797,7 @@ Empty field.
 
 
 
-##### message `RangeResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `RangeResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -768,7 +808,7 @@ Empty field.
 
 
 
-##### message `RequestOp` (etcdserver/etcdserverpb/rpc.proto)
+##### message `RequestOp` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -780,7 +820,7 @@ Empty field.
 
 
 
-##### message `ResponseHeader` (etcdserver/etcdserverpb/rpc.proto)
+##### message `ResponseHeader` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -791,7 +831,7 @@ Empty field.
 
 
 
-##### message `ResponseOp` (etcdserver/etcdserverpb/rpc.proto)
+##### message `ResponseOp` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -803,13 +843,13 @@ Empty field.
 
 
 
-##### message `SnapshotRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `SnapshotRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `SnapshotResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `SnapshotResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -819,13 +859,13 @@ Empty field.
 
 
 
-##### message `StatusRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `StatusRequest` (api/etcdserverpb/rpc.proto)
 
 Empty field.
 
 
 
-##### message `StatusResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `StatusResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -842,7 +882,7 @@ Empty field.
 
 
 
-##### message `TxnRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `TxnRequest` (api/etcdserverpb/rpc.proto)
 
 From google paxosdb paper: Our implementation hinges around a powerful primitive which we call MultiOp. All other database operations except for iteration are implemented as a single call to MultiOp. A MultiOp is applied atomically and consists of three components: 1. A list of tests called guard. Each test in guard checks a single entry in the database. It may check for the absence or presence of a value, or compare with a given value. Two different tests in the guard may apply to the same or different entries in the database. All tests in the guard are applied and MultiOp returns the results. If all tests are true, MultiOp executes t op (see item 2 below), otherwise it executes f op (see item 3 below). 2. A list of database operations called t op. Each operation in the list is either an insert, delete, or lookup operation, and applies to a single database entry. Two different operations in the list may apply to the same or different entries in the database. These operations are executed if guard evaluates to true. 3. A list of database operations called f op. Like t op, but executed if guard evaluates to false.
 
@@ -854,7 +894,7 @@ From google paxosdb paper: Our implementation hinges around a powerful primitive
 
 
 
-##### message `TxnResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `TxnResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -864,7 +904,7 @@ From google paxosdb paper: Our implementation hinges around a powerful primitive
 
 
 
-##### message `WatchCancelRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `WatchCancelRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -872,7 +912,7 @@ From google paxosdb paper: Our implementation hinges around a powerful primitive
 
 
 
-##### message `WatchCreateRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `WatchCreateRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -887,7 +927,7 @@ From google paxosdb paper: Our implementation hinges around a powerful primitive
 
 
 
-##### message `WatchProgressRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `WatchProgressRequest` (api/etcdserverpb/rpc.proto)
 
 Requests the a watch stream progress status be sent in the watch response stream as soon as possible.
 
@@ -895,7 +935,7 @@ Empty field.
 
 
 
-##### message `WatchRequest` (etcdserver/etcdserverpb/rpc.proto)
+##### message `WatchRequest` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -906,7 +946,7 @@ Empty field.
 
 
 
-##### message `WatchResponse` (etcdserver/etcdserverpb/rpc.proto)
+##### message `WatchResponse` (api/etcdserverpb/rpc.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -921,7 +961,7 @@ Empty field.
 
 
 
-##### message `Event` (mvcc/mvccpb/kv.proto)
+##### message `Event` (api/mvccpb/kv.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -931,7 +971,7 @@ Empty field.
 
 
 
-##### message `KeyValue` (mvcc/mvccpb/kv.proto)
+##### message `KeyValue` (api/mvccpb/kv.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |
@@ -970,7 +1010,7 @@ Empty field.
 
 
 
-##### message `Permission` (auth/authpb/auth.proto)
+##### message `Permission` (api/authpb/auth.proto)
 
 Permission is a single entity
 
@@ -982,7 +1022,7 @@ Permission is a single entity
 
 
 
-##### message `Role` (auth/authpb/auth.proto)
+##### message `Role` (api/authpb/auth.proto)
 
 Role is a single entry in the bucket authRoles
 
@@ -993,7 +1033,7 @@ Role is a single entry in the bucket authRoles
 
 
 
-##### message `User` (auth/authpb/auth.proto)
+##### message `User` (api/authpb/auth.proto)
 
 User is a single entry in the bucket authUsers
 
@@ -1006,7 +1046,7 @@ User is a single entry in the bucket authUsers
 
 
 
-##### message `UserAddOptions` (auth/authpb/auth.proto)
+##### message `UserAddOptions` (api/authpb/auth.proto)
 
 | Field | Description | Type |
 | ----- | ----------- | ---- |

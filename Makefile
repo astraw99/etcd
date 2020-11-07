@@ -10,6 +10,15 @@
 #   make docker-kill
 #   make docker-remove
 
+UNAME := $(shell uname)
+XARGS = xargs
+
+# -r is only necessary on GNU xargs.
+ifeq ($(UNAME), Linux)
+XARGS += -r
+endif
+XARGS += rm -r
+
 .PHONY: build
 build:
 	GO_BUILD_FLAGS="-v" ./build
@@ -18,22 +27,15 @@ build:
 
 clean:
 	rm -f ./codecov
-	rm -rf ./agent-*
 	rm -rf ./covdir
-	rm -f ./*.coverprofile
-	rm -f ./*.log
 	rm -f ./bin/Dockerfile-release
-	rm -rf ./bin/*.etcd
+	rm -rf ./bin/etcd*
 	rm -rf ./default.etcd
 	rm -rf ./tests/e2e/default.etcd
-	rm -rf ./gopath
-	rm -rf ./gopath.proto
 	rm -rf ./release
-	rm -f ./snapshot/localhost:*
-	rm -f ./tools/etcd-dump-metrics/localhost:*
-	rm -f ./integration/127.0.0.1:* ./integration/localhost:*
-	rm -f ./clientv3/integration/127.0.0.1:* ./clientv3/integration/localhost:*
-	rm -f ./clientv3/ordering/127.0.0.1:* ./clientv3/ordering/localhost:*
+	rm -rf ./coverage/*.err ./coverage/*.out
+	rm -rf ./tests/e2e/default.proxy
+	find ./ -name "127.0.0.1:*" -o -name "localhost:*" -o -name "*.log" -o -name "agent-*" -o -name "*.coverprofile" -o -name "testname-proxy-*" | $(XARGS)
 
 docker-clean:
 	docker images
@@ -51,7 +53,7 @@ docker-remove:
 
 
 
-GO_VERSION ?= 1.13.3
+GO_VERSION ?= 1.14.3
 ETCD_VERSION ?= $(shell git rev-parse --short HEAD || echo "GitNotFound")
 
 TEST_SUFFIX = $(shell date +%s | base64 | head -c 15)
@@ -65,11 +67,11 @@ endif
 
 
 # Example:
-#   GO_VERSION=1.13.3 make build-docker-test
+#   GO_VERSION=1.14.3 make build-docker-test
 #   make build-docker-test
 #
 #   gcloud docker -- login -u _json_key -p "$(cat /etc/gcp-key-etcd-development.json)" https://gcr.io
-#   GO_VERSION=1.13.3 make push-docker-test
+#   GO_VERSION=1.14.3 make push-docker-test
 #   make push-docker-test
 #
 #   gsutil -m acl ch -u allUsers:R -r gs://artifacts.etcd-development.appspot.com
@@ -79,6 +81,7 @@ build-docker-test:
 	$(info GO_VERSION: $(GO_VERSION))
 	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/Dockerfile
 	docker build \
+	  --network=host \
 	  --tag gcr.io/etcd-development/etcd-test:go$(GO_VERSION) \
 	  --file ./tests/Dockerfile .
 	@mv ./tests/Dockerfile.bak ./tests/Dockerfile
@@ -189,6 +192,7 @@ build-docker-release-master:
 	$(info ETCD_VERSION: $(ETCD_VERSION))
 	cp ./Dockerfile-release ./bin/Dockerfile-release
 	docker build \
+	  --network=host \
 	  --tag gcr.io/etcd-development/etcd:$(ETCD_VERSION) \
 	  --file ./bin/Dockerfile-release \
 	  ./bin
@@ -223,6 +227,7 @@ build-docker-static-ip-test:
 	$(info GO_VERSION: $(GO_VERSION))
 	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/docker-static-ip/Dockerfile
 	docker build \
+	  --network=host \
 	  --tag gcr.io/etcd-development/etcd-static-ip-test:go$(GO_VERSION) \
 	  --file ./tests/docker-static-ip/Dockerfile \
 	  ./tests/docker-static-ip
@@ -287,6 +292,7 @@ build-docker-dns-test:
 	$(info GO_VERSION: $(GO_VERSION))
 	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/docker-dns/Dockerfile
 	docker build \
+	  --network=host \
 	  --tag gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  --file ./tests/docker-dns/Dockerfile \
 	  ./tests/docker-dns
@@ -421,6 +427,7 @@ build-docker-dns-srv-test:
 	$(info GO_VERSION: $(GO_VERSION))
 	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/docker-dns-srv/Dockerfile
 	docker build \
+	  --network=host \
 	  --tag gcr.io/etcd-development/etcd-dns-srv-test:go$(GO_VERSION) \
 	  --file ./tests/docker-dns-srv/Dockerfile \
 	  ./tests/docker-dns-srv
@@ -493,7 +500,7 @@ docker-dns-srv-test-certs-wildcard-run:
 build-functional:
 	$(info GO_VERSION: $(GO_VERSION))
 	$(info ETCD_VERSION: $(ETCD_VERSION))
-	./functional/build
+	./tests/functional/build
 	./bin/etcd-agent -help || true && \
 	  ./bin/etcd-proxy -help || true && \
 	  ./bin/etcd-runner --help || true && \
@@ -502,12 +509,13 @@ build-functional:
 build-docker-functional:
 	$(info GO_VERSION: $(GO_VERSION))
 	$(info ETCD_VERSION: $(ETCD_VERSION))
-	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./functional/Dockerfile
+	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/functional/Dockerfile
 	docker build \
+	  --network=host \
 	  --tag gcr.io/etcd-development/etcd-functional:go$(GO_VERSION) \
-	  --file ./functional/Dockerfile \
+	  --file ./tests/functional/Dockerfile \
 	  .
-	@mv ./functional/Dockerfile.bak ./functional/Dockerfile
+	@mv ./tests/functional/Dockerfile.bak ./tests/functional/Dockerfile
 
 	docker run \
 	  --rm \

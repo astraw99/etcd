@@ -20,14 +20,8 @@ import (
 	"testing"
 
 	"github.com/cockroachdb/datadriven"
-	"go.etcd.io/etcd/raft"
+	"go.etcd.io/etcd/raft/v3"
 )
-
-func (env *InteractionEnv) writeErr(err error) {
-	if err != nil {
-		env.Output.WriteString(err.Error())
-	}
-}
 
 func (env *InteractionEnv) handleRaftLog(t *testing.T, d datadriven.TestData) error {
 	idx := firstAsNodeIdx(t, d)

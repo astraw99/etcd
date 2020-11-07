@@ -19,10 +19,10 @@ import (
 	"os"
 	"strings"
 
-	v3 "go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/clientv3/snapshot"
-	pb "go.etcd.io/etcd/etcdserver/etcdserverpb"
-	"go.etcd.io/etcd/pkg/types"
+	pb "go.etcd.io/etcd/api/v3/etcdserverpb"
+	v3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/etcdctl/v3/snapshot"
+	"go.etcd.io/etcd/pkg/v3/types"
 )
 
 type simplePrinter struct {
@@ -284,4 +284,9 @@ func (s *simplePrinter) UserList(r v3.AuthUserListResponse) {
 	for _, user := range r.Users {
 		fmt.Printf("%s\n", user)
 	}
+}
+
+func (s *simplePrinter) AuthStatus(r v3.AuthStatusResponse) {
+	fmt.Println("Authentication Status:", r.Enabled)
+	fmt.Println("AuthRevision:", r.AuthRevision)
 }
